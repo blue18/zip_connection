@@ -1,0 +1,14 @@
+{
+  "name": "zip_connection",
+  "version": "1.0.0",
+  "description": "An app to promote locally sourced food.",
+  "main": "printMessages.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cities": "^1.1.2"
+  }
+}
