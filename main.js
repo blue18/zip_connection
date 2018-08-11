@@ -1,7 +1,15 @@
 // August 9, 2018
-const express = require('express');
+
+// Import the express module 
+var express = require('express');
+
+// Store the express in a variable
 var app = express();
-const bodyParse = require('body-parser');
+
+var port = process.env.PORT || 3001;
+
+var bodyParse = require('body-parser');
+
 const http = require('http');
 const filesystem = require('fs');
 
@@ -24,17 +32,20 @@ const server = http.createServer((request, response) => {
 // Telling the server to listen on port 3000
 server.listen(3000);
 
-
+// Support encoded bodies
 app.use(bodyParse.urlencoded({ extended: true }));
 
-// Message is received in this function
-app.post('/action', (request, response) => {
-    response.send('You send the name "' + request.body.email + '".');
-    console.log(request.body.email);
+app.listen(port, function() {
+    console.log("Server running at http://127.0.0." + port);
 });
 
-app.listen(3001, function() {
-    console.log("Server running at http://127.0.0.1:3001/")
-})
+// Message is received in this function
+app.post('/action', function (request, response) {
+    try {
+        var email = request.body.email;
+        response.send('You send the name "' + email + '".');
+    } catch (error) {
+        console.error(error);
+    }
 
-
+});
