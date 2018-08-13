@@ -2,6 +2,11 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var api = require('./api');
+var port = process.env.PORT || 3000;
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 /*
  * All routes for the API are written in modules in the api/ directory.  The
@@ -10,14 +15,14 @@ var api = require('./api');
  */
 app.use('/', api);
 
-var server = app.listen(3000, function() {
-    var host = server.address().address;
-    var port = server.address().port;
-    
-    console.log("Example app listening at http://%s:$s", host, port);
+
+
+app.listen(port, function() {    
+    console.log("Example app listening at http://localhost:" + port);
 });
 
 // Sending the index page
 app.get('/', function (request, response) {
     response.sendFile(path.join(__dirname + '/index.html'));
 });
+
