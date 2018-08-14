@@ -5,6 +5,9 @@ var api = require('./api');
 var port = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
 
+// Set up the template engine
+app.set('view engine', 'ejs');
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -15,14 +18,14 @@ app.use(bodyParser.json());
  */
 app.use('/', api);
 
-
-
 app.listen(port, function() {    
     console.log("Example app listening at http://localhost:" + port);
 });
 
 // Sending the index page
 app.get('/', function (request, response) {
-    response.sendFile(path.join(__dirname + '/index.html'));
+    //response.sendFile(path.join(__dirname + '/index.html'));
+
+    response.render('index');
 });
 
